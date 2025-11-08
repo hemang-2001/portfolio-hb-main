@@ -68,11 +68,21 @@
 
 @layer base {
   * {
-    @apply border-border !scroll-smooth;
+    @apply border-border;
   }
+
+  /* enable smooth scrolling and reserve space at the top for the fixed navbar
+     so anchor targets aren't hidden behind it */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    /* adjust if your navbar height changes */
+  }
+
   body {
     @apply bg-background text-foreground;
   }
+
   button {
     @apply active:outline-none;
   }

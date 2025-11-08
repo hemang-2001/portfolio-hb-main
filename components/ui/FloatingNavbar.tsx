@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   motion,
   AnimatePresence,
@@ -43,6 +43,30 @@ export const FloatingNav = ({
     }
   });
 
+  const navRef = useRef<HTMLDivElement | null>(null);
+
+  const handleNavClick = (href: string) => (e: React.MouseEvent) => {
+    // If it's an anchor link (starts with #), perform manual scroll with offset
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const id = href.slice(1);
+      // Special handling for home section
+      if (id === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      const el = document.getElementById(id);
+      if (!el) return;
+      const navHeight = navRef.current ? navRef.current.offsetHeight : 0;
+      const rect = el.getBoundingClientRect();
+      const targetY = rect.top + window.scrollY - navHeight - 8; // small extra offset
+      window.scrollTo({ top: targetY, behavior: "smooth" });
+      return;
+    }
+
+    // for non-hash links, allow default behavior (let Link handle it)
+  };
+
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -57,6 +81,7 @@ export const FloatingNav = ({
         transition={{
           duration: 0.2,
         }}
+        ref={navRef}
         className={cn(
           // change rounded-full to rounded-lg
           // remove dark:border-white/[0.2] dark:bg-black bg-white border-transparent
@@ -75,6 +100,7 @@ export const FloatingNav = ({
           <Link
             key={`link=${idx}`}
             href={navItem.link}
+            onClick={handleNavClick(navItem.link)}
             className={cn(
               "relative dark:text-neutral-50 items-center  flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
             )}
