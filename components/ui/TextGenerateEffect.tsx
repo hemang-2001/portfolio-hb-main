@@ -13,7 +13,10 @@ export const TextGenerateEffect = ({
   const [scope, animate] = useAnimate();
   let wordsArray = words.split(" ");
   useEffect(() => {
-    console.log(wordsArray);
+    // re-run animation when animate function or input words change
+    const wordsArrayLocal = words.split(" ");
+    // eslint-disable-next-line no-console
+    console.log(wordsArrayLocal);
     animate(
       "span",
       {
@@ -24,7 +27,7 @@ export const TextGenerateEffect = ({
         delay: stagger(0.2),
       }
     );
-  }, [scope.current]);
+  }, [animate, words]);
 
   const renderWords = () => {
     return (

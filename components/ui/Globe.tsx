@@ -96,7 +96,8 @@ export function Globe({ globeConfig, data }: WorldProps) {
       _buildData();
       _buildMaterial();
     }
-  }, [globeRef.current]);
+    // run when incoming data or config changes
+  }, [data, globeConfig]);
 
   const _buildMaterial = () => {
     if (!globeRef.current) return;
@@ -160,9 +161,43 @@ export function Globe({ globeConfig, data }: WorldProps) {
         .hexPolygonColor((e) => {
           return defaultProps.polygonColor;
         });
-      startAnimation();
+
+      // startAnimation inline
+      globeRef.current
+        .arcsData(data)
+        .arcStartLat((d) => (d as { startLat: number }).startLat * 1)
+        .arcStartLng((d) => (d as { startLng: number }).startLng * 1)
+        .arcEndLat((d) => (d as { endLat: number }).endLat * 1)
+        .arcEndLng((d) => (d as { endLng: number }).endLng * 1)
+        .arcColor((e: any) => (e as { color: string }).color)
+        .arcAltitude((e) => {
+          return (e as { arcAlt: number }).arcAlt * 1;
+        })
+        .arcStroke((e) => {
+          return [0.32, 0.28, 0.3][Math.round(Math.random() * 2)];
+        })
+        .arcDashLength(defaultProps.arcLength)
+        .arcDashInitialGap((e) => (e as { order: number }).order * 1)
+        .arcDashGap(15)
+        .arcDashAnimateTime((e) => defaultProps.arcTime);
+
+      globeRef.current
+        .pointsData(data)
+        .pointColor((e) => (e as { color: string }).color)
+        .pointsMerge(true)
+        .pointAltitude(0.0)
+        .pointRadius(2);
+
+      globeRef.current
+        .ringsData([])
+        .ringColor((e: any) => (t: any) => e.color(t))
+        .ringMaxRadius(defaultProps.maxRings)
+        .ringPropagationSpeed(RING_PROPAGATION_SPEED)
+        .ringRepeatPeriod(
+          (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
+        );
     }
-  }, [globeData]);
+  }, [globeData, data, defaultProps.arcLength, defaultProps.arcTime, defaultProps.maxRings, defaultProps.rings, defaultProps.showAtmosphere, defaultProps.atmosphereAltitude, defaultProps.atmosphereColor, defaultProps.polygonColor]);
 
   const startAnimation = () => {
     if (!globeRef.current || !globeData) return;
@@ -221,7 +256,8 @@ export function Globe({ globeConfig, data }: WorldProps) {
     return () => {
       clearInterval(interval);
     };
-  }, [globeRef.current, globeData]);
+    // re-run when data/globeData change
+  }, [globeData, data]);
 
   return (
     <>
@@ -237,7 +273,7 @@ export function WebGLRendererConfig() {
     gl.setPixelRatio(window.devicePixelRatio);
     gl.setSize(size.width, size.height);
     gl.setClearColor(0xffaaff, 0);
-  }, []);
+  }, [gl, size.width, size.height]);
 
   return null;
 }
