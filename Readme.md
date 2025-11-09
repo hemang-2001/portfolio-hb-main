@@ -26,18 +26,23 @@ This portfolio website is designed for developers aiming to make an impression o
 
 ## Features
 
-- Sleek modern design and theme
-- Responsive across devices (mobile, tablet, desktop)
-- Dynamic projects section for GitHub or personal works
-- Skills \& technology overview
-- Contact form for professional inquiries
-- Easily extensible for blogs or testimonials
+👉 **Hero**: Captivating introduction featuring a spotlight effect and dynamic background.
+
+👉 **Bento Grid**: Modern layout presenting personal information using cutting-edge CSS design techniques.
+
+👉 **3D Elements**:  Interactive 3D design elements, such as a GitHub-style globe and card hover effects, adding depth and engagement.
+
+👉 **Work Experience**: Prominent display of professional background for emphasis and credibility.
+
+👉 **Responsiveness**: Seamless adaptability across all devices, ensuring optimal viewing experience for every user.
+
+and many more, including code architecture and reusability 
 
 ***
 
 ## Technologies Used
 
-- **Frontend:** Next.js, React.js
+- **Frontend:** Next.js, React.js, Three.js
 - **Styling:** Tailwind CSS or CSS Modules
 - **Backend (if applicable):** Node.js, Express.js
 - **Deployment:** Vercel
@@ -133,4 +138,5 @@ Let's build, collaborate, and grow together!
 <div align="center">⁂</div>
 
 [^1]: https://github.com/hemang-2001
+
 
