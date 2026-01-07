@@ -70,8 +70,18 @@ export const gridItems = [
 ];
 
 export const projects = [
+
   {
     id: 1,
+    title: "BiteSync - Social Recipe Sharing App",
+    des: "BiteSync is a modern, mobile-first social recipe sharing application prototype. It allows users to discover recipes, share their culinary creations, and order ingredients directly through integrated services.",
+    img: "/bitesyncss.jpg",
+    iconLists: ["/re.svg", "/tail.svg"],
+    link: "https://bitesync.vercel.app/",
+  },
+
+  {
+    id: 2,
     title: "Smart-Stays: Hotel Booking",
     des: "Smart Stays is a sleek, responsive hotel booking frontend built with React and Tailwind CSS. It offers hotel search, booking management, and secure user authentication via Clerk",
     img: "/Smart-Stays-01.png",
@@ -79,7 +89,7 @@ export const projects = [
     link: "https://smart-stays.vercel.app/",
   },
   {
-    id: 2,
+    id: 3,
     title: "Open-Board",
     des: "Designed and developed Open Board using Next js, Canvas Api and Tailwind CSS, a digital workspace application featuring essential functionalities such as real-time writing, erasing, and saving documents.",
     img: "/Open-Board-02.png",
@@ -87,7 +97,7 @@ export const projects = [
     link: "https://open-board-nu.vercel.app/",
   },
   {
-    id: 3,
+    id: 4,
     title: "Smartube",
     des: "SmarTube is a comprehensive YouTube clone that leverages the power of ReactJS, JavaScript, CSS, HTML, RapidAPI, and Material UI to provide users with a visually appealing, user-friendly, and feature-rich video-sharing platform.",
     img: "/SmarTube-03.png",
@@ -95,7 +105,7 @@ export const projects = [
     link: "https://smartube.vercel.app/",
   },
   {
-    id: 4,
+    id: 5,
     title: "ChefsCorner - Recipe Web Application",
     des: "Recipe web Application to browse through a variety of options and enjoy delicious meals in just a few clicks from convenient and hassle-free!",
     img: "/ChefsCorner-04.png",
